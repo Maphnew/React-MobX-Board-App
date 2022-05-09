@@ -1,0 +1,41 @@
+.App {
+    display: flex;
+}
+
+.article-list,
+.content {
+    padding: 20px;
+    flex: 1;
+}
+
+.article-list__header {
+    display: flex;
+    align-content: space-between;
+}
+
+.userInfo,
+.time {
+    flex: 1;
+}
+
+.userInfo__time {
+    border-style: none;
+}
+
+.board__buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.board {
+    height: 100%;
+}
+
+.content__info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.content__text__textarea {
+    width: 100%;
+}
