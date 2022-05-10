@@ -1,39 +1,57 @@
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState } from "react";
+import { useObserver } from "mobx-react";
+import useStore from "../store/useStore";
 import Modal from "./Modal";
 
 const ArticleList = (props) => {
     const { article, setArticle } = props;
-    const [time, setTime] = useState("");
     const [openModal, setOpenModal] = useState(false);
+    const { articleListStore, saveInfoStore } = useStore();
     useEffect(() => {
-        setTime(new Date().toLocaleTimeString());
-        setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
-    }, []);
-    const newButtonClickHandler = () => {
+        saveInfoStore.setDate(new Date().toLocaleTimeString());
+        setInterval(() => saveInfoStore.setDate(new Date().toLocaleTimeString()), 1000);
+    }, [saveInfoStore]);
+    const userNameChangeHandler = (e) => {
+        saveInfoStore.setAuthor(e.target.value);
+    };
+    const createButtonClickHandler = () => {
         setOpenModal(!openModal);
     };
-    const rowClickHandler = (e) => {
-        setArticle(e.data);
+    const updateButtonClickHandler = () => {
+        articleListStore.updateArticle(article);
     };
-    return (
+    const deleteButtonClickHandler = () => {
+        articleListStore.deleteArticle(article);
+    };
+    const rowClickHandler = (e) => {
+        const { number, title, author, date, content } = e.data;
+        setArticle({
+            number,
+            title,
+            author,
+            date,
+            content,
+        });
+    };
+    return useObserver(() => (
         <>
             <section className="article-list">
                 <div className="article-list__header">
                     <div className="userInfo">
                         <label htmlFor="user">사용자</label>
-                        <input id="user" placeholder="ADMIN"></input>
+                        <input id="user" onChange={userNameChangeHandler} value={saveInfoStore.author} />
                     </div>
                     <div className="time">
                         <label htmlFor="time">현재시간</label>
-                        <input id="time" className="userInfo__time" value={time} readOnly></input>
+                        <input id="time" className="userInfo__time" value={saveInfoStore.date} readOnly></input>
                     </div>
                 </div>
                 <div className="board">
                     <div className="board__buttons">
-                        <button onClick={newButtonClickHandler}>신규</button>
-                        <button>수정</button>
-                        <button>삭제</button>
+                        <button onClick={createButtonClickHandler}>신규</button>
+                        <button onClick={updateButtonClickHandler}>수정</button>
+                        <button onClick={deleteButtonClickHandler}>삭제</button>
                     </div>
                     <div
                         className="board__list ag-theme-material"
@@ -55,20 +73,15 @@ const ArticleList = (props) => {
                                 sortable: true,
                                 filter: true,
                             }}
-                            rowData={[
-                                { number: 1, title: "title1", author: "author1", date: "date1", content: "content1" },
-                                { number: 2, title: "title2", author: "author2", date: "date2", content: "content2" },
-                                { number: 3, title: "title3", author: "author3", date: "date3", content: "content3" },
-                                { number: 4, title: "title4", author: "author4", date: "date4", content: "content4" },
-                            ]}
+                            rowData={articleListStore.articleList}
                             onRowClicked={rowClickHandler}
                         />
                     </div>
                 </div>
             </section>
-            {openModal && <Modal setOpenModal={setOpenModal} article={article} setArticle={setArticle} />}
+            {openModal && <Modal setOpenModal={setOpenModal} author={saveInfoStore.author} />}
         </>
-    );
+    ));
 };
 
 export default ArticleList;
