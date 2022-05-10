@@ -1,8 +1,6 @@
-import { articleListStore } from "./aricleList";
-import { saveInfoStore } from "./saveInfo";
+import { useContext } from "react";
+import { storesContext } from "./storesContext";
 
-const useStore = () => {
-    return { articleListStore, saveInfoStore };
-};
+const useStore = () => useContext(storesContext);
 
 export default useStore;
