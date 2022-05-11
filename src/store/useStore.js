@@ -1,4 +1,4 @@
-import { articleListStore } from "./aricleList";
+import { articleListStore } from "./articleList";
 import { saveInfoStore } from "./saveInfo";
 
 const useStore = () => {
