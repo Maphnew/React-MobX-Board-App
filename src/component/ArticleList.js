@@ -9,8 +9,8 @@ const ArticleList = (props) => {
     const [openModal, setOpenModal] = useState(false);
     const { articleListStore, saveInfoStore } = useStore();
     useEffect(() => {
-        saveInfoStore.setDate(new Date().toLocaleTimeString());
-        setInterval(() => saveInfoStore.setDate(new Date().toLocaleTimeString()), 1000);
+        saveInfoStore.setDate(new Date());
+        setInterval(() => saveInfoStore.setDate(new Date()), 1000);
     }, [saveInfoStore]);
     const userNameChangeHandler = (e) => {
         saveInfoStore.setAuthor(e.target.value);
@@ -44,7 +44,12 @@ const ArticleList = (props) => {
                     </div>
                     <div className="time">
                         <label htmlFor="time">현재시간</label>
-                        <input id="time" className="userInfo__time" value={saveInfoStore.date} readOnly></input>
+                        <input
+                            id="time"
+                            className="userInfo__time"
+                            value={saveInfoStore.date.toLocaleTimeString()}
+                            readOnly
+                        ></input>
                     </div>
                 </div>
                 <div className="board">

@@ -21,7 +21,7 @@ export const articleListStore = observable({
 
     updateArticle(item) {
         this.articleList = this.articleList.map((article) => {
-            if (item.author === article.author && item.date === article.date) {
+            if (item.author === article.author && item.number === article.number) {
                 return item;
             }
             return article;
@@ -30,7 +30,7 @@ export const articleListStore = observable({
 
     deleteArticle(item) {
         this.articleList = this.articleList.filter((article) => {
-            return !(item.author === article.author && item.date === article.date);
+            return !(item.author === article.author && item.number === article.number);
         });
     },
 });

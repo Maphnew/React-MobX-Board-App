@@ -1,8 +1,8 @@
-import { observable } from "mobx";
+import { makeObservable, observable } from "mobx";
 
 export const saveInfoStore = observable({
     author: "Anonymous",
-    date: new Date().toLocaleTimeString(),
+    date: new Date(),
 
     setAuthor(author) {
         this.author = author;

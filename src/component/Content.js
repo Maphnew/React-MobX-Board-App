@@ -13,7 +13,7 @@ const Content = (props) => {
         });
     }, [saveInfoStore.author]);
     const submitHandler = (e) => {
-        article.date = saveInfoStore.date;
+        article.date = saveInfoStore.date.toLocaleDateString();
         e.preventDefault();
         articleListStore.createArticle(article);
         setOpenModal(false);
@@ -26,8 +26,16 @@ const Content = (props) => {
     return useObserver(() => (
         <section className="content">
             <form id="form-content" onSubmit={submitHandler}>
-                <h3>Title</h3>
-                <input id="title" className="content__title" value={article.title} onChange={contentChangeHandler} />
+                <h3>Contents</h3>
+                <label>
+                    제목
+                    <input
+                        id="title"
+                        className="content__title"
+                        value={article.title}
+                        onChange={contentChangeHandler}
+                    />
+                </label>
                 <div className="content__info">
                     <label>
                         작성자
