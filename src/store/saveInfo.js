@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { observable } from "mobx";
 
 export const saveInfoStore = observable({
     author: "Anonymous",
