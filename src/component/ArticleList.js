@@ -59,7 +59,7 @@ const ArticleList = (props) => {
                         <button onClick={deleteButtonClickHandler}>삭제</button>
                     </div>
                     <div
-                        className="board__list ag-theme-material"
+                        className="board__list ag-theme-alpine"
                         style={{
                             height: "100%",
                             minHeight: "200px",
@@ -79,7 +79,10 @@ const ArticleList = (props) => {
                                 filter: true,
                             }}
                             rowData={articleListStore.articleList}
+                            // onSelectionChanged={rowClickHandler}
+                            // onRowSelected={rowClickHandler}
                             onRowClicked={rowClickHandler}
+                            rowSelection={"single"}
                         />
                     </div>
                 </div>

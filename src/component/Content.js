@@ -19,7 +19,7 @@ const Content = (props) => {
         setOpenModal(false);
     };
     const contentChangeHandler = (e) => {
-        const tempArticle = Object.assign(article);
+        const tempArticle = Object.assign({}, article);
         tempArticle[e.target.id] = e.target.value;
         setArticle({ ...tempArticle });
     };
