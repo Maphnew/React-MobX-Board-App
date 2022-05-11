@@ -6,6 +6,8 @@ Javascript 상태관리 라이브러리 중 하나인 [MobX](https://ko.mobx.js.
 
 'mobx' 브랜치에는 객체형 store를 구성하였고, 'mobx-class-store'에는 class형 store를 구성하였다.
 
+개념을 먼저 잘 이해하고 소스코드를 작성하는 것이 도움이 될 것이다.
+
 ## 개념 이해하기
 
 [10분만에 알아보는 MobX와 React](https://ko.mobx.js.org/getting-started.html) 문서를 보면서 개념을 이해해 보자.
