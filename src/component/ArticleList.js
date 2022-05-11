@@ -84,7 +84,7 @@ const ArticleList = (props) => {
                     </div>
                 </div>
             </section>
-            {openModal && <Modal setOpenModal={setOpenModal} author={saveInfoStore.author} />}
+            {openModal && <Modal setOpenModal={setOpenModal} />}
         </>
     ));
 };
