@@ -1,17 +1,16 @@
 import { AgGridReact } from "ag-grid-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useObserver } from "mobx-react";
 import useStore from "../store/useStore";
 import Modal from "./Modal";
+import Time from "./Time";
 
 const ArticleList = (props) => {
+    console.log("Article component rendered");
     const { article, setArticle } = props;
     const [openModal, setOpenModal] = useState(false);
     const { articleListStore, saveInfoStore } = useStore();
-    useEffect(() => {
-        saveInfoStore.setDate(new Date());
-        setInterval(() => saveInfoStore.setDate(new Date()), 1000);
-    }, [saveInfoStore]);
+
     const userNameChangeHandler = (e) => {
         saveInfoStore.setAuthor(e.target.value);
     };
@@ -42,15 +41,7 @@ const ArticleList = (props) => {
                         <label htmlFor="user">사용자</label>
                         <input id="user" onChange={userNameChangeHandler} value={saveInfoStore.author} />
                     </div>
-                    <div className="time">
-                        <label htmlFor="time">현재시간</label>
-                        <input
-                            id="time"
-                            className="userInfo__time"
-                            value={saveInfoStore.date.toLocaleTimeString()}
-                            readOnly
-                        ></input>
-                    </div>
+                    <Time />
                 </div>
                 <div className="board">
                     <div className="board__buttons">
