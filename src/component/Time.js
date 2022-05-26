@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import useStore from "../store/useStore";
 
 const Time = () => {
-    console.log("Time component rendered");
     const { saveInfoStore } = useStore();
 
     useEffect(() => {
