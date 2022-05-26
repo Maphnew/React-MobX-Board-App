@@ -13,6 +13,7 @@ const Content = (props) => {
         });
     }, [saveInfoStore.author]);
     const submitHandler = (e) => {
+        console.log(saveInfoStore.date);
         article.date = saveInfoStore.date.toLocaleDateString();
         e.preventDefault();
         articleListStore.createArticle(article);
