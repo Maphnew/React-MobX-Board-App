@@ -1,12 +1,13 @@
 import { AgGridReact } from "ag-grid-react";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faPenToSquare, faTrashCan, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useObserver } from "mobx-react";
 import useStore from "../store/useStore";
 import Modal from "./Modal";
 import Time from "./Time";
 
 const ArticleList = (props) => {
-    console.log("Article component rendered");
     const { article, setArticle } = props;
     const [openModal, setOpenModal] = useState(false);
     const { articleListStore, saveInfoStore } = useStore();
@@ -38,19 +39,27 @@ const ArticleList = (props) => {
             <section className="article-list">
                 <div className="article-list__header">
                     <div className="userInfo">
-                        <label htmlFor="user">사용자</label>
+                        <label htmlFor="user">
+                            <FontAwesomeIcon icon={faUser} className="ic-gray" /> 사용자
+                        </label>
                         <input id="user" onChange={userNameChangeHandler} value={saveInfoStore.author} />
                     </div>
                     <Time />
                 </div>
                 <div className="board">
                     <div className="board__buttons">
-                        <button onClick={createButtonClickHandler}>신규</button>
-                        <button onClick={updateButtonClickHandler}>수정</button>
-                        <button onClick={deleteButtonClickHandler}>삭제</button>
+                        <button onClick={createButtonClickHandler}>
+                            <FontAwesomeIcon icon={faPlus} /> 신규
+                        </button>
+                        <button onClick={updateButtonClickHandler}>
+                            <FontAwesomeIcon icon={faPenToSquare} /> 수정
+                        </button>
+                        <button onClick={deleteButtonClickHandler}>
+                            <FontAwesomeIcon icon={faTrashCan} /> 삭제
+                        </button>
                     </div>
                     <div
-                        className="board__list ag-theme-alpine"
+                        className="board__list ag-theme-material"
                         style={{
                             height: "100%",
                             minHeight: "200px",
@@ -70,10 +79,7 @@ const ArticleList = (props) => {
                                 filter: true,
                             }}
                             rowData={articleListStore.articleList}
-                            // onSelectionChanged={rowClickHandler}
-                            // onRowSelected={rowClickHandler}
                             onRowClicked={rowClickHandler}
-                            rowSelection={"single"}
                         />
                     </div>
                 </div>
